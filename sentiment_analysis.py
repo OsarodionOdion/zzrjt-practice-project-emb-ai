@@ -10,6 +10,7 @@ Input json: { "raw_document": { "text": text_to_analyse } }
 '''
 
 import requests
+import json
 
 def sentiment_analyzer(text_to_analyse):
 
@@ -19,7 +20,7 @@ def sentiment_analyzer(text_to_analyse):
         text_to_analyse (str): text to be analyzed
 
     returns:
-        str: text attribute of the BERT model response object on the analyzed text
+        dict: The sentiment label and score
 
     """
     # URL of the sentiment analysis service
@@ -34,4 +35,11 @@ def sentiment_analyzer(text_to_analyse):
     # send POST request to the API with the text and headers
     response = requests.post(url, json = myobj, headers=header)
 
-    return response.text
+    # Parsing the JSON response from the API
+    formatted_response = json.loads(response.text)
+
+    # Extracting sentiment label and score from the response
+    label = formatted_response['documentSentiment']['label']
+    score = formatted_response['documentSentiment']['score']
+
+    return {'label': label, 'score': score}
