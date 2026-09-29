@@ -21,16 +21,16 @@ def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
     # Pass the text to the sentiment_analyzer function and store the response
     response = sentiment_analyzer(text_to_analyze)
-    
     # Control flow for invalid input
-    if response['label'] == None and response['score'] == None:
+    if response['label'] is None and response['score'] is None:
         return "Invalid input ! Try again."
 
     # Extract the label and score from the response
     label = response['label'][5:]
     score = str(response['score'])
 
-    return "The given text has been identified as {} with a confidence score of {}.".format(label, score)
+    return f"The given text has been identified as {label} with a confidence \
+    score of {score}."
 
 @app.route("/")
 def render_index_page():
