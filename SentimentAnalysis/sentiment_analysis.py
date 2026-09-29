@@ -35,6 +35,10 @@ def sentiment_analyzer(text_to_analyse):
     # send POST request to the API with the text and headers
     response = requests.post(url, json=myobj, headers=header)
 
+    # control for invalid text entry
+    if response.status_code != 200:
+        return {'label': None, 'score': None}
+
     # Parsing the JSON response from the API
     formatted_response = json.loads(response.text)
 
