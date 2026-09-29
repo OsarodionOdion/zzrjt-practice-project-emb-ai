@@ -9,7 +9,6 @@ Headers: {"grpc-metadata-mm-model-id": "sentiment_aggregated-bert-workflow_lang_
 Input json: { "raw_document": { "text": text_to_analyse } }
 
 '''
-
 import json
 import requests
 
