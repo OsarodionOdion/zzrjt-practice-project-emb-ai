@@ -20,6 +20,9 @@ def sent_analyzer():
     '''
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
+    # Control flow for blank text
+    if text_to_analyze == "":
+        return "No text entered ! Try again."
     # Pass the text to the sentiment_analyzer function and store the response
     response = sentiment_analyzer(text_to_analyze)
     # Control flow for invalid input
